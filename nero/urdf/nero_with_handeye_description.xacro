@@ -1,0 +1,167 @@
+<!-- nero hand-eye variant: arm + gripper_flange + openarm gripper + hand-eye camera.
+     Follows the nero convention: flat links/joints, xacro:include only (no macros/params).
+     Mounts on gripper_flange, reusing the flange layer via include (like the gripper variant). -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="nero">
+<xacro:include filename="$(find agx_arm_description)/agx_arm_urdf/nero/urdf/nero_with_gripper_flange_description.xacro"/>
+
+
+  <link
+    name="endeffector_base_link">
+    <inertial>
+      <origin
+        xyz="-0.00823027326200249 2.23514056134186E-18 0.00875365549793531"
+        rpy="0 0 0" />
+      <mass
+        value="0.102282632118334" />
+      <inertia
+        ixx="5.53936272978172E-05"
+        ixy="1.46341724578831E-20"
+        ixz="1.53329611739714E-08"
+        iyy="3.46588794518327E-05"
+        iyz="5.43776774231115E-22"
+        izz="8.84478616009874E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="endeffector_base_link_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.01"
+      rpy="0 0 0" />
+    <parent
+      link="gripper_flange" />
+    <child
+      link="endeffector_base_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="end_point_link">
+    <inertial>
+      <origin
+        xyz="-1.23028670139052E-09 1.73472347597681E-18 0.0648443771008311"
+        rpy="0 0 0" />
+      <mass
+        value="0.0534321538206244" />
+      <inertia
+        ixx="4.79644094134221E-05"
+        ixy="-5.32360812357627E-11"
+        ixz="-2.26763003040317E-12"
+        iyy="4.81762945680171E-05"
+        iyz="3.59695627016764E-22"
+        izz="4.57906580222582E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/end_point_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.498039215686275 0.498039215686275 0.498039215686275 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/end_point_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="end_point_joint"
+    type="fixed">
+    <origin
+      xyz="0.0155 0 0.1275"
+      rpy="3.1416 0 1.5708" />
+    <parent
+      link="endeffector_base_link" />
+    <child
+      link="end_point_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="hand_eye_camera_link">
+    <inertial>
+      <origin
+        xyz="0.00503091354265199 6.13311072507168E-06 0.0123843639611123"
+        rpy="0 0 0" />
+      <mass
+        value="0.0197150970342339" />
+      <inertia
+        ixx="1.4476965753632E-05"
+        ixy="-6.23479322830121E-09"
+        ixz="-1.1580268544267E-08"
+        iyy="2.80948348806754E-06"
+        iyz="-1.00940904623301E-08"
+        izz="1.4833122948371E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/hand_eye_camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://agx_arm_description/agx_arm_urdf/nero/meshes/handeye/hand_eye_camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="hand_eye_camera_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0425 0 0.036401"
+      rpy="3.1416 -1.5708 0" />
+    <parent
+      link="endeffector_base_link" />
+    <child
+      link="hand_eye_camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
